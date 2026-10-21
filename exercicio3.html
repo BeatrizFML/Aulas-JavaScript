@@ -4,17 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercício 3</title>
+    <style>
+      body {
+        background-color: rgb(209, 0, 0);
+        display: flex;
+        margin-top: 50px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      button {
+        padding: 20px;
+        font-family: fantasy;
+        font-size: 20px;
+        border-radius: 40px;
+      }
+      div {
+        display: flex;
+        gap: 20px;
+      }
+      #aumentar {
+        background-color: rgb(19, 228, 30);
+      }
+      #diminuir {
+        background-color: rgb(212, 212, 49);
+      }
+    </style>
   </head>
   <body>
-    <img src="https://i.pinimg.com/236x/a7/90/fe/a790fe7355271203e7d8fd1890a29318.jpg" height="200px">
+    <img id="img" src="https://i.pinimg.com/236x/a7/90/fe/a790fe7355271203e7d8fd1890a29318.jpg" height="200px" title="Lulinha lendo o livro de regras do Ordem Paranormal">
     <br>
-    <h3>Tamanho da imagem: <span>200</span>px</h3>
+    <h3>Tamanho da imagem: <span></span>px</h3>
     <br>
-    <button id="aumentar">Aumentar imagem</button>
-    <button id="diminuir">Diminuir imagem</button>
+    <div>
+      <button id="aumentar">Aumentar imagem</button>
+      <button id="diminuir">Diminuir imagem</button>
+    </div>
 
     <script>
+      let img = document.getElementById("img");
+      let btnAumentar = document.getElementById("aumentar");
+      let btnDiminuir = document.getElementById("diminuir");
+      let span = document.getElementsByTagName("span")[0];
       
+      span.textContent = img.height;
+
+      btnAumentar.addEventListener("click", function() {
+        if(img.height <= 770){
+          img.height = img.height + 30;
+        }
+        span.textContent = img.height;
+      })
+
+      btnDiminuir.addEventListener("click", function() {
+        if(img.height >= 230){
+          img.height = img.height - 30;
+        }
+        span.textContent = img.height;
+      })
     </script>
   </body>
 </html>
