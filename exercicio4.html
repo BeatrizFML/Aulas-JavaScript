@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Contatos</title>
+
+    <style>
+      body {
+        background: url(https://static.wikia.nocookie.net/ordemparanormal/images/5/54/Arte_Show_Psikolera_em_Hexatombe.jpg/revision/latest/scale-to-width-down/1000?cb=20251102152332&path-prefix=pt-br) no-repeat center / cover fixed;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;     
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 600px;
+        height: 100vh;
+        background-color: #EA7D9C;
+      }
+
+      input {
+        padding: 15px;
+        border: solid 2px #FF4D7C;
+        border-radius: 50px;
+        width: 200px;
+        font-family: 'Franklin Gothic Medium';
+      }
+
+      button {
+        background-color: #FF4D7C;
+        padding: 20px;
+        width: 170px;
+        border-radius: 50px;
+        border: solid 2px #FF1A62;
+        font-size: 25px;
+        font-family: 'Times New Roman';
+      }
+
+      button:hover {
+        background-color: #FF1A62;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="contatos">
+      <h2 style="font-size: 80px;">Contatos</h2>
+      <input id="nome" type="text" placeholder="Nome"> <br> <br>
+      <input id="telefone" type="text" placeholder="Telefone"> <br> <br>
+      <button id="cadastrar">Cadastrar</button>
+      
+      <ul id="lista">
+      </ul>
+    </div>
+
+    <script>
+      let contatos = [];
+      const nome = document.querySelector("#nome");
+      const telefone = document.getElementById("telefone");
+      const lista = document.getElementById("lista")[0];
+      const botao = document.getElementById("cadastrar");
+
+      let contato = {
+          nome: nome.value,
+          telefone: telefone.value
+
+      };
+      botao.addEventListener("click", cadastrarContato());
+
+      function cadastrarContato() {
+        contato = {
+          nome: nome.value,
+          telefone: telefone.value
+        };
+        contatos.push(contato);
+
+        mostrarContatos();
+      }
+
+      function mostrarContatos(){
+        let item = document.createElement("li");
+        item.txtContent = contato.nome + " - " + contato.telefone;
+
+      }
+
+    </script>
+
+  </body>
+</html>
