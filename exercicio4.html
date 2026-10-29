@@ -7,50 +7,50 @@
 
     <style>
       body {
-        background: url(https://static.wikia.nocookie.net/ordemparanormal/images/5/54/Arte_Show_Psikolera_em_Hexatombe.jpg/revision/latest/scale-to-width-down/1000?cb=20251102152332&path-prefix=pt-br) no-repeat center / cover fixed;
-        margin: 0;
+        background: url(https://art.ngfiles.com/images/2505000/2505873_angiespice_spamton-background-thingy.png?f1651895494) no-repeat center / cover fixed;
+        margin: 20px 30px;
         display: flex;
-        justify-content: center;
-        align-items: center;     
+        justify-content: left;
+        align-items: center;
+        font-family: 'Times New Roman';  
       }
 
       div {
         display: flex;
         align-items: center;
         flex-direction: column;
-        width: 600px;
-        height: 100vh;
-        background-color: #EA7D9C;
+        background-color: #b9dfff98;
+        border-radius: 50px;
       }
 
       input {
         padding: 15px;
-        border: solid 2px #FF4D7C;
+        border: solid 2px #4c81c5;
         border-radius: 50px;
-        width: 200px;
-        font-family: 'Franklin Gothic Medium';
+        width: 330px;
+        font-family: 'Times New Roman';
       }
 
       button {
-        background-color: #FF4D7C;
+        background-color: #4c81c5;
         padding: 20px;
-        width: 170px;
+        width: 230px;
         border-radius: 50px;
-        border: solid 2px #FF1A62;
+        border: solid 2px #2f69b4;
         font-size: 25px;
         font-family: 'Times New Roman';
       }
 
       button:hover {
-        background-color: #FF1A62;
+        background-color: #2f69b4;
       }
 
     </style>
   </head>
   <body>
     <div id="contatos">
-      <h2 style="font-size: 80px;">Contatos</h2>
-      <input id="nome" type="text" placeholder="Nome"> <br> <br>
+      <h2 style="font-size: 60px; margin: 30px 200px;">Contatos</h2>
+      <input id="nome" type="text" placeholder="Nome"> <br>
       <input id="telefone" type="text" placeholder="Telefone"> <br> <br>
       <button id="cadastrar">Cadastrar</button>
       
@@ -62,30 +62,36 @@
       let contatos = [];
       const nome = document.querySelector("#nome");
       const telefone = document.getElementById("telefone");
-      const lista = document.getElementById("lista")[0];
+      const lista  = document.getElementById("lista");
       const botao = document.getElementById("cadastrar");
 
-      let contato = {
-          nome: nome.value,
-          telefone: telefone.value
+      botao.addEventListener("click", cadastrarContato);
 
-      };
-      botao.addEventListener("click", cadastrarContato());
-
-      function cadastrarContato() {
-        contato = {
-          nome: nome.value,
-          telefone: telefone.value
+      function cadastrarContato(){
+        let n=nome.value;
+        let t = telefone.value;
+        if(n === "" || t === ""){
+          alert("Preencha os campos!");
+          return;
+        }
+        let contato = {
+          nome: n,
+          telefone: t
         };
+      
         contatos.push(contato);
-
         mostrarContatos();
+        nome.value = "";
+        telefone.value = "";
       }
-
+      
       function mostrarContatos(){
+        lista.innerHTML = "";
+        contatos.forEach(function(contato){
         let item = document.createElement("li");
-        item.txtContent = contato.nome + " - " + contato.telefone;
-
+        item.textContent = contato.nome + " - " + contato.telefone;
+        lista.appendChild(item);
+        });
       }
 
     </script>
