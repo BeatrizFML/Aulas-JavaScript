@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisão 1</title>
+  </head>
+  <body>
+    <div id="numero">0</div>
+
+    <button onclick="mais()">Incrementar</button>
+    <button onclick="menos()">Decrementar</button>
+    <button onclick="zerar()">Zerar</button>
+
+    <script>
+      let contador = 0;
+      const num = document.getElementById('numero');
+
+      function mais() {
+        contador++;
+        num.textContent = contador;
+      }
+
+      function menos() {
+        contador--;
+        num.textContent = contador;
+      }
+
+      function zerar() {
+        contador = 0;
+        num.textContent = contador;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisão 2</title>
+  </head>
+  <body>
+    <h1 id="titulo">Título</h1>
+    <p id="paragrafo">Parágrafo.</p>
+    <button id="botao" onclick="alterarConteudo()">Clique Aqui</button>
+
+    <script>
+        function alterarConteudo() {
+            document.getElementById('titulo').textContent = 'Spookyy!';
+            document.getElementById('paragrafo').textContent = 'Buuuu!!!';
+            document.getElementById('botao').textContent = 'Não Clique Aqui';
+        }
+    </script>
+  </body>
+</html>

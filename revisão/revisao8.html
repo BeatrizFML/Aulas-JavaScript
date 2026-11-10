@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisão 6</title>
+    <style>
+      .miniatura {
+        height: 150px;
+        width: auto;
+        display: block;
+      }
+
+      .foto-destaque {
+        height: 600px;
+        width: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+        <h2 id="nome-imagem">Nenhuma imagem selecionada</h2>
+        <img id="imagem-grande" class="foto-destaque" src="" alt="Selecione uma imagem">
+    </div>
+
+    <hr>
+
+    <div>
+        <div>
+            <img class="miniatura" src="https://static.wikia.nocookie.net/ordemparanormal/images/5/5d/Capa_de_Contos_da_Vig%C3%ADlia.jpg/revision/latest?cb=20261102142842&path-prefix=pt-br" alt="A Vigilia">
+            <button onclick="exibirImagem('https://static.wikia.nocookie.net/ordemparanormal/images/5/5d/Capa_de_Contos_da_Vig%C3%ADlia.jpg/revision/latest?cb=20261102142842&path-prefix=pt-br', 'A Vigilia')">Exibir Vigilia</button>
+        </div>
+        
+        <div>
+            <img class="miniatura" src="https://static.wikia.nocookie.net/ordemparanormal/images/4/4a/Hexatombe_Ep_8.jpg/revision/latest/scale-to-width-down/1200?cb=20251212194517&path-prefix=pt-br" alt="Hexatombe">
+            <button onclick="exibirImagem('https://static.wikia.nocookie.net/ordemparanormal/images/4/4a/Hexatombe_Ep_8.jpg/revision/latest/scale-to-width-down/1200?cb=20251212194517&path-prefix=pt-br', 'Hexatombe')">Exibir Hexatombe</button>
+        </div>
+
+        <div>
+            <img class="miniatura" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1J4Zai9qwQli48CgHBFBKdzRBhvQ5wZyHXGSlkR5dSA&s" alt="Sinais">
+            <button onclick="exibirImagem('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1J4Zai9qwQli48CgHBFBKdzRBhvQ5wZyHXGSlkR5dSA&s', 'Sinais')">Exibir Sinais</button>
+        </div>
+    </div>
+
+    <script>
+        function exibirImagem(url, nome) {
+            const imagemGrande = document.getElementById('imagem-grande');
+            const textoNome = document.getElementById('nome-imagem');
+
+            imagemGrande.src = url;
+            textoNome.textContent = nome;
+        }
+    </script>
+  </body>
+</html>

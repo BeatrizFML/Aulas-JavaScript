@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque</title>
+</head>
+<body>
+
+    <h1>Controle de Estoque</h1>
+
+    <div>
+        <h3>Cadastrar Novo Produto</h3>
+        <label>Nome do Produto:</label><br>
+        <input type="text" id="nome" placeholder="Ex: Teclado Mecânico"><br><br>
+
+        <label>Quantidade:</label><br>
+        <input type="number" id="quantidade" min="0" placeholder="Ex: 10"><br><br>
+
+        <label>Preço Unitário (R$):</label><br>
+        <input type="number" id="preco" min="0" step="0.01" placeholder="Ex: 150.00"><br><br>
+
+        <button onclick="cadastrarProduto()">Cadastrar Produto</button>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Valor Total do Estoque</h3>
+        <p id="valor-total-estoque">R$ 0,00</p>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Produtos Cadastrados</h3>
+        <ul id="lista-produtos">
+        </ul>
+    </div>
+
+    <script>
+        let estoque = [];
+
+        function cadastrarProduto() {
+            const nomeInput = document.getElementById('nome');
+            const quantidadeInput = document.getElementById('quantidade');
+            const precoInput = document.getElementById('preco');
+
+            const nome = nomeInput.value.trim();
+            const quantidade = parseInt(quantidadeInput.value);
+            const preco = parseFloat(precoInput.value);
+
+            if (nome === "" || isNaN(quantidade) || isNaN(preco)) {
+                alert("Por favor, preencha todos os campos corretamente.");
+                return;
+            }
+
+            const novoProduto = {
+                id: Date.now(),
+                nome: nome,
+                quantidade: quantidade,
+                preco: preco
+            };
+
+            estoque.push(novoProduto);
+
+            nomeInput.value = "";
+            quantidadeInput.value = "";
+            precoInput.value = "";
+
+            atualizarInterface();
+        }
+
+        function excluirProduto(id) {
+            estoque = estoque.filter(produto => produto.id !== id);
+            atualizarInterface();
+        }
+
+        function calcularTotalEstoque() {
+            let total = 0;
+            for (let i = 0; i < estoque.length; i++) {
+                total += estoque[i].quantidade * estoque[i].preco;
+            }
+            return total;
+        }
+
+        function atualizarInterface() {
+            const listaElement = document.getElementById('lista-produtos');
+            const totalElement = document.getElementById('valor-total-estoque');
+
+            listaElement.innerHTML = "";
+
+            if (estoque.length === 0) {
+                listaElement.innerHTML = "<li>Nenhum produto cadastrado.</li>";
+            }
+
+            estoque.forEach(produto => {
+                const itemLista = document.createElement('li');
+                const subtotal = produto.quantidade * produto.preco;
+
+                itemLista.innerHTML = `
+                    <strong>${produto.nome}</strong> - 
+                    Quantidade: ${produto.quantidade} | 
+                    Preço: R$ ${produto.preco.toFixed(2)} | 
+                    Subtotal: R$ ${subtotal.toFixed(2)} 
+                    <button onclick="excluirProduto(${produto.id})">Excluir</button>
+                `;
+                
+                listaElement.appendChild(itemLista);
+            });
+
+            const valorTotal = calcularTotalEstoque();
+            totalElement.textContent = `R$ ${valorTotal.toFixed(2)}`;
+        }
+    </script>
+
+</body>
+</html>

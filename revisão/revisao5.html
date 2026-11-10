@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisão 5</title>
+  </head>
+  <body>
+    <input type="text" id="produtoInput" placeholder="Nome do produto">
+    <button onclick="adicionarProduto()">Adicionar</button>
+
+    <ul id="listaCompras"></ul>
+
+    <script>
+        function adicionarProduto() {
+            const input = document.getElementById('produtoInput');
+            const lista = document.getElementById('listaCompras');
+            const nomeProduto = input.value.trim();
+
+            if (nomeProduto === "") {
+                return;
+            }
+
+            const novoItem = document.createElement('li');
+
+            const textoProduto = document.createElement('span');
+            textoProduto.textContent = nomeProduto + " ";
+
+            const botaoComprado = document.createElement('button');
+            botaoComprado.textContent = 'Comprado';
+            botaoComprado.onclick = function() {
+                textoProduto.innerHTML = textoProduto.innerHTML + ' - Comprado ';
+            };
+
+            const botaoExcluir = document.createElement('button');
+            botaoExcluir.textContent = 'Excluir';
+            botaoExcluir.onclick = function() {
+                novoItem.style.display='none';
+            };
+
+            novoItem.appendChild(textoProduto);
+            novoItem.appendChild(botaoComprado);
+            novoItem.appendChild(botaoExcluir);
+
+            lista.appendChild(novoItem);
+
+            input.value = "";
+        }
+    </script>
+  </body>
+</html>

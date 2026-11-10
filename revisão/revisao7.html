@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Notas</title>
+</head>
+<body>
+
+    <h1>Cadastro de Notas</h1>
+
+    <div>
+        <h3>Cadastrar Aluno</h3>
+        <label>Nome do Aluno:</label><br>
+        <input type="text" id="nome-aluno" placeholder="Ex: João Silva"><br><br>
+
+        <label>Nota:</label><br>
+        <input type="number" id="nota-aluno" min="0" max="10" step="0.1" placeholder="Ex: 7.5"><br><br>
+
+        <button onclick="cadastrarAluno()">Cadastrar Aluno</button>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Média Geral da Turma</h3>
+        <p id="media-turma">0.0</p>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Alunos Cadastrados</h3>
+        <ul id="lista-alunos">
+        </ul>
+    </div>
+
+    <script>
+        let alunos = [];
+
+        function cadastrarAluno() {
+            const nomeInput = document.getElementById('nome-aluno');
+            const notaInput = document.getElementById('nota-aluno');
+
+            const nome = nomeInput.value.trim();
+            const nota = parseFloat(notaInput.value);
+
+            if (nome === "" || isNaN(nota) || nota < 0 || nota > 10) {
+                alert("Por favor, preencha o nome e uma nota válida entre 0 e 10.");
+                return;
+            }
+
+            const novoAluno = {
+                id: Date.now(),
+                nome: nome,
+                nota: nota
+            };
+
+            alunos.push(novoAluno);
+
+            nomeInput.value = "";
+            notaInput.value = "";
+
+            atualizarInterface();
+        }
+
+        function excluirAluno(id) {
+            alunos = alunos.filter(aluno => aluno.id !== id);
+            atualizarInterface();
+        }
+
+        function calcularMediaTurma() {
+            if (alunos.length === 0) return 0;
+            
+            let soma = 0;
+            for (let i = 0; i < alunos.length; i++) {
+                soma += alunos[i].nota;
+            }
+            return soma / alunos.length;
+        }
+
+        function atualizarInterface() {
+            const listaElement = document.getElementById('lista-alunos');
+            const mediaElement = document.getElementById('media-turma');
+
+            listaElement.innerHTML = "";
+
+            if (alunos.length === 0) {
+                listaElement.innerHTML = "<li>Nenhum aluno cadastrado.</li>";
+            }
+
+            alunos.forEach(aluno => {
+                const itemLista = document.createElement('li');
+                const situacao = aluno.nota >= 6 ? "Aprovado" : "Reprovado";
+
+                itemLista.innerHTML = `
+                    <strong>${aluno.nome}</strong> - 
+                    Nota: ${aluno.nota.toFixed(1)} | 
+                    Situação: ${situacao} 
+                    <button onclick="excluirAluno(${aluno.id})">Excluir</button>
+                `;
+                
+                listaElement.appendChild(itemLista);
+            });
+
+            const mediaTotal = calcularMediaTurma();
+            mediaElement.textContent = mediaTotal.toFixed(1);
+        }
+    </script>
+
+</body>
+</html>
